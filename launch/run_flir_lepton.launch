@@ -1,5 +1,9 @@
 <!-- Starts a FLIR lepton thermal camera -->
 <launch>
-  <node pkg="flir_thermal_driver" type="flir_thermal_driver_lepton" name="flir_lepton_node" output="screen" ns="thermal">
-   </node>
+  <node pkg="flir_thermal_driver" type="flir_thermal_driver_lepton" name="flir_lepton_node" output="screen">
+    <!-- Serial Number required for launching multiple cameras! -->
+    <!-- To get serial number, plug in only the camera desired and run -->
+    <!-- 'udevadm info /dev/video0 | grep ID_SERIAL_SHORT' --> 
+    <!-- <param name="device_sn" value="801c0030-5112-3039-3433-373300000000" /> -->
+  </node>
 </launch>

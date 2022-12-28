@@ -13,14 +13,15 @@
 #define PT1_PID 0x0100
 #define FLIR_VID 0x09cb
 
-LeptonNode::LeptonNode( )
+LeptonNode::LeptonNode(ros::NodeHandle &private_node)
     : m_ctx(NULL)
     , m_dev(NULL)
     , m_devh(NULL)
     , m_bi ( NULL )
     , m_it ( ros::NodeHandle("~" ) )
+    , private_node_(private_node)
 {
-    m_pub = m_it.advertiseCamera("lepton/image", 5);
+    m_pub = m_it.advertiseCamera("image_raw", 5);
     m_ids.push_back({ PT1_VID, PT1_PID });
     //m_ids.push_back({ FLIR_VID, 0x0000 }); // any flir camera
     init();
@@ -76,11 +77,24 @@ void LeptonNode::init()
 
     ROS_INFO("UVC initialized");
 
-    /* Locates the first attached UVC device, stores in dev */
-    for (int i = 0; i < m_ids.size(); ++i) {
-        res = uvc_find_device( m_ctx, &m_dev, m_ids[i].vid, m_ids[i].pid, NULL);
-        if (res >= 0)
-            break;
+    std::string device_sn;
+    if (private_node_.getParam("device_sn", device_sn))
+    {
+        ROS_INFO("Opening by SN");
+        /* Locates the UVC device with specified SN */
+        for (int i = 0; i < m_ids.size(); ++i) {
+            res = uvc_find_device( m_ctx, &m_dev, m_ids[i].vid, m_ids[i].pid, device_sn.c_str());
+            if (res >= 0)
+                break;
+        }
+    } else {
+        ROS_INFO("Opening first UVC device");
+        /* Locates the first attached UVC device, stores in dev */
+        for (int i = 0; i < m_ids.size(); ++i) {
+            res = uvc_find_device( m_ctx, &m_dev, m_ids[i].vid, m_ids[i].pid, NULL);
+            if (res >= 0)
+                break;
+        }
     }
 
     if (res < 0) {

@@ -15,8 +15,8 @@ public:
         int vid;
         int pid;
     };
-
-    LeptonNode( );
+    
+    LeptonNode(ros::NodeHandle& private_node);
     ~LeptonNode( );
     void init();
 
@@ -38,6 +38,8 @@ protected:
 private:
     image_transport::ImageTransport m_it;
     image_transport::CameraPublisher m_pub;
+
+    ros::NodeHandle private_node_;
 
     static void cb(uvc_frame_t *frame, void *ptr);
 };
