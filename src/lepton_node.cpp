@@ -122,9 +122,15 @@ void LeptonNode::init()
     if ( m_bi != NULL )
     {
         setVideoFormat( m_bi->getDefaultFormat(), m_bi->getDefaultHeight(), m_bi->getDefaultWidth() );
+        setGainLow(m_bi);
     }
 }
 
+void LeptonNode::setGainLow(LeptonInterface* interface)
+{
+    interface->setGainLow();
+    ROS_INFO("Set device gain to low");
+}
 
 void LeptonNode::setVideoFormat(const LeptonInterface::VideoFormat &format, const int frameHeight, const int frameWidth )
 {

@@ -23,6 +23,7 @@ public:
     void pauseStream();
     void resumeStream();
     bool isRunning() { return m_isRunning; }
+    void setGainLow(LeptonInterface* interface);
     void setVideoFormat(const LeptonInterface::VideoFormat &format, const int frameHeight, const int frameWidth );
 
 protected:

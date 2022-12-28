@@ -51,6 +51,8 @@ public:
 
     void performFfc();
 
+    void setGainLow();
+
     VideoFormat getDefaultFormat() const { return Y16; } //YUV420P; }
     //VideoFormat getDefaultFormat() const { return YUV420P; }
     int getDefaultHeight() const { return 120; }

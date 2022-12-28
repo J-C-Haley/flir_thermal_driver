@@ -174,6 +174,11 @@ void LeptonInterface::performFfc()
     LEP_RunSysFFCNormalization(&m_portDesc);
 }
 
+void LeptonInterface::setGainLow()
+{
+    LEP_SetSysGainMode(&m_portDesc, LEP_SYS_GAIN_MODE_LOW);
+}
+
 int LeptonInterface::leptonCommandIdToUnitId(LEP_COMMAND_ID commandID)
 {
     int unit_id;
