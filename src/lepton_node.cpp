@@ -77,7 +77,8 @@ void LeptonNode::init()
 
     ROS_INFO("UVC initialized");
 
-    std::string device_sn;
+    private_node_.param<std::string>("frame_id", frame_id,"/thermal");
+    
     if (private_node_.getParam("device_sn", device_sn))
     {
         ROS_INFO("Opening by SN");
@@ -232,7 +233,7 @@ void LeptonNode::cb(uvc_frame_t *frame, void *ptr)
     {
         notInitialized = false;
         header.seq = 0;
-        header.frame_id = "/thermal";
+        header.frame_id = _this->frame_id;
         cameraInfo = sensor_msgs::CameraInfoPtr ( new sensor_msgs::CameraInfo );
         cameraInfo->height = frame->height;
         cameraInfo->width = frame->width;

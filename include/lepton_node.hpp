@@ -35,6 +35,8 @@ protected:
     LeptonInterface * m_bi;
     std::vector<UsbId> m_ids;
     LeptonInterface::VideoFormat m_cur_format;
+    std::string frame_id;
+    std::string device_sn;
 private:
     image_transport::ImageTransport m_it;
     image_transport::CameraPublisher m_pub;
