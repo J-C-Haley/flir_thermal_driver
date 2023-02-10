@@ -5,5 +5,7 @@
     <!-- To get serial number, plug in only the camera desired and run -->
     <!-- 'udevadm info /dev/video0 | grep ID_SERIAL_SHORT' --> 
     <!-- <param name="device_sn" value="801c0030-5112-3039-3433-373300000000" /> -->
+    <!-- frame_id defaults to the camera serial number if not set-->
+    <!-- <param name="frame_id" value="CAMERA_NAME" /> -->
   </node>
 </launch>

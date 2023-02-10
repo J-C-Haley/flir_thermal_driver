@@ -76,9 +76,7 @@ void LeptonNode::init()
     }
 
     ROS_INFO("UVC initialized");
-
-    private_node_.param<std::string>("frame_id", frame_id,"/thermal");
-    
+   
     if (private_node_.getParam("device_sn", device_sn))
     {
         ROS_INFO("Opening by SN");
@@ -128,6 +126,9 @@ void LeptonNode::init()
 
     uvc_device_descriptor_t *desc;
     uvc_get_device_descriptor(m_dev, &desc);
+
+    device_sn = desc->serialNumber;
+    private_node_.param<std::string>("frame_id", frame_id, device_sn);
 
     if (desc->idVendor == PT1_VID )
         m_bi = new LeptonInterface( m_ctx, m_dev, m_devh );
