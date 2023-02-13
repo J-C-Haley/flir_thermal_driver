@@ -242,12 +242,27 @@ void LeptonNode::cb(uvc_frame_t *frame, void *ptr)
         cameraInfo->binning_x = 1;
         cameraInfo->binning_y = 1;
         cameraInfo->D.resize(5,0);
+        // D
+        cameraInfo->D[0] = -0.3181688783703262;
+        cameraInfo->D[1] = 0.4105699026461243;
+        cameraInfo->D[2] = 0.002362966145096937;
+        cameraInfo->D[3] = -0.001223598556121757;
+        cameraInfo->D[4] = -1.076798405010292;
         // K
         for ( int i = 0; i < cameraInfo->K.size(); ++i) cameraInfo->K[i] = 0;
-        cameraInfo->K[0] = frame->width; // fx
-        cameraInfo->K[2] = frame->width/2; // cx
-        cameraInfo->K[4] = frame->width; // fy
-        cameraInfo->K[5] = frame->height/2; // cy
+        // cameraInfo->K[0] = frame->width; // fx
+        // cameraInfo->K[2] = frame->width/2; // cx
+        // cameraInfo->K[4] = frame->width; // fy
+        // cameraInfo->K[5] = frame->height/2; // cy
+        // cameraInfo->K[8] = 1;
+        cameraInfo->K[0] = 160.9017741001411;
+        cameraInfo->K[1] = 0;
+        cameraInfo->K[2] = 76.67807171715174;
+        cameraInfo->K[3] = 0;
+        cameraInfo->K[4] = 161.7105554685859;
+        cameraInfo->K[5] = 65.87684301176721;
+        cameraInfo->K[6] = 0;
+        cameraInfo->K[7] = 0;
         cameraInfo->K[8] = 1;
         // R=Id
         for ( int i = 0; i < cameraInfo->R.size(); ++i) cameraInfo->R[i] = 0;
@@ -256,11 +271,23 @@ void LeptonNode::cb(uvc_frame_t *frame, void *ptr)
         cameraInfo->R[8] = 1;
         // P=K
         for ( int i = 0; i < cameraInfo->P.size(); ++i) cameraInfo->P[i] = 0;
-        cameraInfo->P[0] = frame->width; // fx
-        cameraInfo->P[2] = frame->width/2; // cx
-        cameraInfo->P[5] = frame->width; // fy
-        cameraInfo->P[7] = frame->height/2; // cy
-        cameraInfo->P[10] = 1;
+        // cameraInfo->P[0] = frame->width; // fx
+        // cameraInfo->P[2] = frame->width/2; // cx
+        // cameraInfo->P[5] = frame->width; // fy
+        // cameraInfo->P[7] = frame->height/2; // cy
+        // cameraInfo->P[10] = 1;
+        cameraInfo->P[0] = 159.8961334228516;
+        cameraInfo->P[1] = 0.0;
+        cameraInfo->P[2] = 76.19883323768681;
+        cameraInfo->P[3] = 0.0;
+        cameraInfo->P[4] = 0.0;
+        cameraInfo->P[5] = 158.0287170410156;
+        cameraInfo->P[6] = 64.37695455754692;
+        cameraInfo->P[7] = 0.0;
+        cameraInfo->P[8] = 0.0;
+        cameraInfo->P[9] = 0.0;
+        cameraInfo->P[10] = 1.0;
+        cameraInfo->P[11] = 0.0;
     }
     ++header.seq;
     header.stamp = rec;
